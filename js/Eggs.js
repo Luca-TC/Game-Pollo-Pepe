@@ -1,4 +1,4 @@
-// class Bullets {
+// class Eggs {
 
 //     constructor(ctx, playerPosX, playerPosY, playerPosY0, playerWidth, playerHeight) {
 //         this.ctx = ctx;

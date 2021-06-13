@@ -5,7 +5,6 @@ const Game = {
     height: undefined,
     FPS: 60,
     framesCounter: 0,
-
     background: undefined,
     player: undefined,
     obstacles: [],
@@ -51,11 +50,11 @@ const Game = {
 
 
     reset() {
-        this.background = new Background(this.ctx, this.width, this.height, "./images/super.png")
-        this.player = new Player(this.ctx, "./images/pollo-p.jpg", 50, 50, this.width, this.height, this.keys)
+        this.background = new Background(this.ctx, this.width, this.height, "./images/background.png")
+        this.player = new Player(this.ctx, "./images/pollo-p.png", 50, 50, this.width, this.height, this.keys)
         this.obstacles = [
-            new Obstacles(this.ctx, 100, 50, 850, 560, this.height), 
-            new Obstacles(this.ctx, 100, 50, 345, 550, this.height), 
+            new Obstacles(this.ctx, 100, 50, 850, 560, this.height),
+            new Obstacles(this.ctx, 100, 50, 345, 550, this.height),
             new Obstacles(this.ctx, 100, 50, 650, 650, this.height),
             new Obstacles(this.ctx, 200, 50, 350, 750, this.height),
             new Obstacles(this.ctx, 200, 50, 675, 250, this.height)]
@@ -69,7 +68,7 @@ const Game = {
     clear() {
         this.ctx.clearRect(0, 0, this.width, this.height)
     },
-       move() {
+    move() {
         this.player.moveRight()
         this.player.moveLeft()
         this.player.moveDown()

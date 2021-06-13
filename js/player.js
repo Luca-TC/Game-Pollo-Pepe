@@ -43,9 +43,8 @@ class Player {
     moveLeft() {
         this.playerPosX -= this.velX
         console.log(this.playerPosX)//puse los limites
-
-        if ((this.playerPosX + this.playerWidth) < 0) {
-            this.playerPosX = 0 *(- this.playerPosX)
+        if ((this.playerPosX - this.playerWidth) <= 0) {
+            this.playerPosX = 0 
             console.log(this.playerPosX)//puse los limites
         }
     }
@@ -55,14 +54,14 @@ class Player {
     // }
     moveUp() {
         this.playerPosY -= this.velY
-        if ((this.playerPosY + this.playerHeight) <= 0) {
+        if ((this.playerPosY - this.playerHeight) <= 0) {
             this.playerPosY = 0//puse los limites
         }
     }
     moveDown() {
         this.playerPosY += this.velY
-        if ((this.playerPosY + this.playerHeight) <= 0) {
-            this.playerPosY = this.height //puse los limites
+        if ((this.playerPosY + this.playerHeight) >= this.height) {
+            this.playerPosY = this.height - this.playerHeight //puse los limites
         }
     }
     // jump() {
@@ -111,9 +110,3 @@ class Player {
 
 
 }
-
-// IsKeyDown: function(key) {
-//     if (this.Pressed[key] != null)
-//         return this.Pressed[key];
-//     return false;
-// },
