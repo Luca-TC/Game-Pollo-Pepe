@@ -10,13 +10,12 @@ class Player {
         this.playerWidth = playerW
         this.playerHeight = playerH
 
-        this.playerPosX0 = 50
+        this.playerPosX0 =  this.playerWidth + 20
         this.playerPosY0 = this.height - this.playerHeight - 20
         // console.log(this.playerPosY)
         console.log(playerH)
         //he tenido que poner las posiciones 'zero'
-        this.playerPosX = this.playerPosX0
-        this.playerPosY = this.playerPosY0
+        this.playerPos={X : this.playerPosX0,Y : this.playerPosY0}
         this.velY = 30
         this.velX = 30// nuevo cambio del domingo, 
         //podemos poner una variable por cambiar la velocidad con que se mueve el pollo
@@ -25,15 +24,15 @@ class Player {
         this.setListeners()
     }
     draw() {
-        this.ctx.drawImage(this.image, this.playerPosX, this.playerPosY, this.playerWidth, this.playerHeight)
+        this.ctx.drawImage(this.image, this.playerPos.X, this.playerPos.Y, this.playerWidth, this.playerHeight)
 
     }
 
 
     moveRight() {
-        this.playerPosX += this.velX
-        if ((this.playerPosX + this.playerWidth) >= this.width) {
-            this.playerPosX = this.width - this.playerWidth//puse los limites
+        this.playerPos.X += this.velX
+        if ((this.playerPos.X + this.playerWidth) >= this.width) {
+            this.playerPos.X = this.width - this.playerWidth//puse los limites
         }
     }
     // moveRightUp() {
@@ -41,11 +40,11 @@ class Player {
     //     this.playerPosY -= 3
     //     }
     moveLeft() {
-        this.playerPosX -= this.velX
-        console.log(this.playerPosX)//puse los limites
-        if ((this.playerPosX - this.playerWidth) <= 0) {
-            this.playerPosX = 0 
-            console.log(this.playerPosX)//puse los limites
+        this.playerPos.X -= this.velX
+        console.log(this.playerPos.X)//puse los limites
+        if ((this.playerPos.X - this.playerWidth) <= 0) {
+            this.playerPos.X = 0
+            console.log(this.playerPos.X)//puse los limites
         }
     }
     // moveLeftUp() {
@@ -53,24 +52,24 @@ class Player {
     //     this.playerPosY -= 3
     // }
     moveUp() {
-        this.playerPosY -= this.velY
-        if ((this.playerPosY - this.playerHeight) <= 0) {
-            this.playerPosY = 0//puse los limites
+        this.playerPos.Y -= this.velY
+        if ((this.playerPos.Y - this.playerHeight) <= 0) {
+            this.playerPos.Y = 0//puse los limites
         }
     }
     moveDown() {
-        this.playerPosY += this.velY
-        if ((this.playerPosY + this.playerHeight) >= this.height) {
-            this.playerPosY = this.height - this.playerHeight //puse los limites
+        this.playerPos.Y += this.velY
+        if ((this.playerPos.Y + this.playerHeight) >= this.height) {
+            this.playerPos.Y = this.height - this.playerHeight //puse los limites
         }
     }
-    // jump() {
-    //     this.playerPosY -= 40
-    //     if (this.playerPosY >= this.posY0 /*&& this.playerPosY == 40*/) {
-    //         this.playerPosY -= 40;
-    //         this.velY -= 8;
-    //     }
-    // }
+    jump() {
+        this.playerPos.Y -= 40
+        if (this.playerPos.Y >= this.posY0 /*&& this.playerPosY == 40*/) {
+            this.playerPos.Y -= 40;
+            this.velY -= 8;
+        }
+    }
     setListeners() {
 
         document.addEventListener("keydown", e => {
@@ -100,10 +99,10 @@ class Player {
                     this.moveDown()
                     console.log('down')
                     break;
-                // case this.keys.SPACE:
-                //     this.jump();
-                //     console.log('JUMP')
-                //     break;
+                case this.keys.SPACE:
+                    this.jump();
+                    console.log('JUMP')
+                    break;
             }
         });
     }

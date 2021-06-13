@@ -52,7 +52,7 @@ const Game = {
     reset() {
         this.background = new Background(this.ctx, this.width, this.height, "./images/background.png")
         this.player = new Player(this.ctx, "./images/pollo-p.png", 50, 50, this.width, this.height, this.keys)
-        this.obstacles = [
+        this.obstacles = [//remeber the limits of other screens
             new Obstacles(this.ctx, 100, 50, 850, 560, this.height),
             new Obstacles(this.ctx, 100, 50, 345, 550, this.height),
             new Obstacles(this.ctx, 100, 50, 650, 650, this.height),
@@ -65,9 +65,9 @@ const Game = {
         this.obstacles.forEach(obs => obs.draw())
     },
 
-    clear() {
-        this.ctx.clearRect(0, 0, this.width, this.height)
-    },
+    // clear() {
+    //     this.ctx.clearRect(0, 0, this.width, this.height)
+    // },
     move() {
         this.player.moveRight()
         this.player.moveLeft()
