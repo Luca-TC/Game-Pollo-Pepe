@@ -22,13 +22,12 @@ const Game = {
         this.ctx = this.canvas.getContext("2d")
         this.setDimensions()
         this.start()
-        this.move()
 
     },
 
     setDimensions() {
-        this.width = window.innerWidth
-        this.height = window.innerHeight
+        this.width = 1260
+        this.height = 960
         this.canvas.width = this.width
         this.canvas.height = this.height
     },
@@ -41,10 +40,12 @@ const Game = {
 
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
 
-
             this.drawAll()
 
+            this.moveCollision()
+            this.player.fell()
 
+            console.log(this.moveCollision())
         }, 1000 / this.FPS)
     },
 
@@ -63,17 +64,37 @@ const Game = {
         this.background.draw()
         this.player.draw()
         this.obstacles.forEach(obs => obs.draw())
+
+
     },
+    moveCollision() {
+        return this.obstacles.some((obs, idx) => {
+            if (this.player.playerPos.X + this.player.playerWidth > obs.ObsPos.x &&
+                this.player.playerPos.Y + this.player.playerHeight > obs.ObsPos.y &&
+                this.player.playerPos.Y < obs.ObsPos.y + obs.ObsHeight &&
+                this.player.playerPos.X < obs.ObsPos.x + obs.ObsWidth) { //SI HAY COLISION
+
+                if (this.player.playerPos.Y <= obs.ObsPos.y + obs.ObsHeight) {
+                    this.player.playerPosY0 = obs.ObsPos.y - this.player.playerHeight
+                    console.log('da con la pies en la parte superiorrrr')
+
+                } else if ((this.player.playerPos.Y + this.player.playerHeight) <= obs.ObsPos.y) {
+                    this.player.playerPos.Y = obs.ObsPos.y - this.player.playerHeight
+                    console.log('da con la cabeza en la parte inferior')
+
+                } else {
+                    this.player.fell()
+                }
+
+            }
+        })
+    }
+
+
+
 
     // clear() {
     //     this.ctx.clearRect(0, 0, this.width, this.height)
     // },
-    move() {
-        this.player.moveRight()
-        this.player.moveLeft()
-        this.player.moveDown()
-        this.player.moveUp()
-    }
+
 }
-/*Decirle al pixel que en todos los ejes X e Y
-creza +1 o decrezca -1 si va hacia adelante o hacia atras, arriba o abajo.*/
