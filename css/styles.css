@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+body{ 
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    background-color: #1D7EC2;
+    
+}
+
+#canvas{
+    border: 2px solid red;}
