@@ -13,11 +13,9 @@ class Player {
         this.playerPosX0 = 50
         this.playerPosY0 = this.height - this.playerHeight - 20
 
-        console.log(playerH)
-
         this.playerPos = { X: this.playerPosX0, Y: this.playerPosY0 }
 
-        this.vel = { X: 10, Y: 10 }
+        this.vel = { X: 20, Y: 20 }
 
         this.gravity = 0.4
         this.keys = Keys
@@ -38,21 +36,24 @@ class Player {
     }
     moveLeft() {
         this.playerPos.X -= this.vel.X
-        console.log(this.playerPos.X)//puse los limites
         if ((this.playerPos.X - this.playerWidth) <= 0) {
             this.playerPos.X = 0
-            console.log(this.playerPos.X)//puse los limites
         }
     }
 
     moveUp() {
-        this.vel.Y = -20
-        this.playerPos.Y += this.vel.Y
-        //limite superior
-        if ((this.playerPos.Y - this.playerHeight) <= 0) {
-            this.playerPosY0//puse los limites
-            console.log('jump')
+
+        if (this.playerPos.Y > 0) {
+            this.vel.Y = -12.5// da reglar
+            this.playerPos.Y += this.vel.Y
         }
+        if (this.playerPos.Y <= 0) {
+            //   console.log('rebota')
+            // console.log(this.vel.Y)
+            this.vel.Y *= -1
+            this.playerPos.Y += this.vel.Y
+        }
+
 
     }
     fell() {
@@ -62,6 +63,8 @@ class Player {
             this.playerPos.Y += this.vel.Y // funciona, pero rebota mal.
         }
     }
+
+
 
 
     setListeners() {
@@ -78,13 +81,9 @@ class Player {
                     break;
                 case this.keys.LEFT:
                     this.moveLeft()
-                    console.log('left')
+                    //  console.log('left')
                     break;
 
-                // case this.keys.DOWN:
-                //     this.moveDown()
-                //     console.log('down')
-                //     break;
 
             }
         });

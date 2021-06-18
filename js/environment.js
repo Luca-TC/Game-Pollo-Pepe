@@ -5,17 +5,23 @@ class Obstacles {
         this.height = gameHeight
         this.width = 50
 
-        this.ObsWidth = ObsW
+        this.ObsWidth = (Math.random() * ObsW) + 75
         this.ObsHeight = ObsH
 
-        this.ObsPos = { x: ObsPosX, y: ObsPosY }
-        // console.log(this.ObsPosY)
-        console.log(ObsH, this.ObsPos.x)
-            ;
+        this.ObsPos = { x: ObsPosX, y: (Math.random() * (ObsPosY-20)) + (this.height / 2) }
+
+
+        this.velX = 2.5;
     }
     draw() {
         this.ctx.fillStyle = '#F2871C'
         this.ctx.fillRect(this.ObsPos.x, this.ObsPos.y, this.ObsWidth, this.ObsHeight)
-
+        this.move()
+    }
+    move() {
+        if (this.ObsPos.x <= -this.width) {
+            this.ObsPos.x = 0;
+        }
+        this.ObsPos.x -= this.velX;
     }
 }

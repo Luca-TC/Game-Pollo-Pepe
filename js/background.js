@@ -1,5 +1,4 @@
 class Background {
-
     constructor(ctx, w, h, imgSource) {
         this.ctx = ctx;
         this.width = w;
